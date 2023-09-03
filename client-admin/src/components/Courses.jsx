@@ -99,7 +99,7 @@ export function GetCourse(props) {
                 >
                   Edit
                 </Button>
-                <Button size="small" >Delete</Button>
+                <Button size="small">Delete</Button>
               </CardActions>
             </Card>
           </Grid>
