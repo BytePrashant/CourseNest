@@ -9,12 +9,11 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { Card, Typography, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 function Courses() {
@@ -33,11 +32,12 @@ function Courses() {
   }, []);
   return (
     <div>
+      {/* Header */}
       <Box
         sx={{
-          bgcolor: "background.paper",
-          pt: 8,
-          pb: 6,
+          backgroundColor: "background.paper",
+          paddingTop: 8,
+          paddingBottom: 6,
         }}
       >
         <Container maxWidth="sm">
@@ -52,19 +52,53 @@ function Courses() {
           </Typography>
         </Container>
       </Box>
-      <Container sx={{ py: 8 }} maxWidth="md">
-        <Grid container spacing={4} >
-          {courses.map((item) => {
-            return <GetCourse course={item} />;
-          })}
+
+      {/* Course List */}
+      <Container sx={{ paddingTop: 8, paddingBottom: 8 }} maxWidth="md">
+        <Grid container spacing={4}>
+          {courses.map((item) => (
+            <Grid item xs={12} sm={6} md={4} key={item.id}>
+              <GetCourse course={item} />
+            </Grid>
+          ))}
         </Grid>
       </Container>
+
+      {/* Add a button or additional content if needed */}
+      {/* <Container maxWidth="md">
+        <Button variant="contained" color="primary" fullWidth>
+          Load More
+        </Button>
+      </Container> */}
     </div>
   );
 }
 
 export function GetCourse(props) {
   const navigate = useNavigate();
+  function deleteCourse() {
+    var userInput = window.prompt("Type DELETE to delete the course: ");
+    const id = props.course._id;
+    if (userInput === "DELETE") {
+      axios
+        .delete(
+          
+            `http://localhost:3000/admin/courses/${props.courseId}`, 
+          // `https://jeysiva-learn-academy-server.vercel.app/admin/courses/${id}`,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          setCourses(courses.filter((course) => course._id !== id));
+          toast.success(res.data.message);
+          navigate("/courses");
+        })
+        .catch((err) => console.log(err));
+    }
+  }
   return (
     <main>
       <CssBaseline>
@@ -89,7 +123,6 @@ export function GetCourse(props) {
                 <Typography gutterBottom variant="h5" component="h2">
                   {props.course.title}
                 </Typography>
-                <Typography>Heading</Typography>
                 <Typography>{props.course.description}</Typography>
               </CardContent>
               <CardActions>
@@ -99,7 +132,10 @@ export function GetCourse(props) {
                 >
                   Edit
                 </Button>
-                <Button size="small">Delete</Button>
+                
+                <Button size="small" onClick={() => deleteCourse()}>
+                  Delete
+                </Button>
               </CardActions>
             </Card>
           </Grid>

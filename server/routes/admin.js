@@ -29,7 +29,7 @@ router.post("/signup", (req, res) => {
       newAdmin.save();
 
       const token = jwt.sign({ username, role: "admin" }, SECRET, {
-        expiresIn: "30d",
+        expiresIn: "1d",
       });
       res.json({ message: "Admin created successfully", token });
     }
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
   const admin = await Admin.findOne({ username, password });
   if (admin) {
     const token = jwt.sign({ username, role: "admin" }, SECRET, {
-      expiresIn: "30d",
+      expiresIn: "1d",
     });
     res.json({ message: "Logged in successfully", token });
   } else {
@@ -77,25 +77,14 @@ router.get("/course/:courseId", authenticateJwt, async (req, res) => {
   const course = await Course.findById(courseId);
   res.json({ course });
 });
-
 router.delete("/courses/:courseId", authenticateJwt, async (req, res) => {
-  const courseId = req.params.courseId;
-  try {
-    // Attempt to delete the course by its ID
-    const deletedCourse = await Course.findByIdAndDelete(courseId);
-
-    if (!deletedCourse) {
-      // Course not found
-      res.status(404).json({ message: "Course not found" });
-    } else {
-      // Course successfully deleted
-      res.json({ message: "Course deleted successfully" });
-    }
-  } catch (error) {
-    // Handle any errors that occur during the deletion process
-    console.error("Error deleting course:", error);
-    res.status(500).json({ message: "Internal server error" });
+  const course = await Course.findByIdAndDelete(req.params.courseId, req.body, {
+    new: true,
+  });
+  if (course) {
+    res.json({ message: "Course deleted successfully" });
+  } else {
+    res.status(404).json({ message: "Course not found" });
   }
 });
-
 module.exports = router;

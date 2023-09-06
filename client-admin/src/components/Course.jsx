@@ -17,11 +17,10 @@ import {
 
 function Course() {
   let { courseId } = useParams();
-  const [courses, setCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [course, setCourse] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/admin/course", {
+    fetch("http://localhost:3000/admin/courses/${courseId}", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -34,28 +33,24 @@ function Course() {
         return res.json(); 
       })
       .then((data) => {
-        setCourses(data.courses);
+        setCourse(data.course);
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [courseId]);
 
-  console.log("courses:", courses);
-  const course = courses.find((course) => course.id === parseInt(courseId));
+  const coursePage = course.find((course) => course.id === parseInt(courseId));
 
-  // if (isLoading) {
-  //   return <CircularProgress />;
-  // }
-  if (!course) {
+  if (!coursePage) {
     return <div>Course not found.</div>;
   }
 
   return (
     <div>
       <CourseCard course={course} />
-      <UpdateCourse courses={courses} course={course} setCourses={setCourses} />
+      <UpdateCourse course={course} setCourse={setCourse} />
     </div>
   );
 }
@@ -137,7 +132,7 @@ function UpdateCourse(props) {
             size="large"
             variant="contained"
             onClick={() => {
-              fetch("http://localhost:3000/admin/courses/" + props.course.id, {
+              fetch("http://localhost:3000/admin/courses/${props.course.id}", {
                 method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
@@ -152,18 +147,14 @@ function UpdateCourse(props) {
               })
                 .then((res) => res.json())
                 .then((data) => {
-                  const updatedCourses = props.courses.map((item) =>
-                    props.course.id === item.id
-                      ? {
-                          id: item.id,
-                          title: title,
-                          description: description,
-                          imageLink: image,
-                          published: true,
-                        }
-                      : props.course
-                  );
-                  props.setCourses(updatedCourses);
+                  const updatedCourse = {
+                    ...props.course,
+                    title: title,
+                    description: description,
+                    imageLink: image,
+                    published: true,
+                  };
+                  props.setCourse(updatedCourse);
                 });
             }}
           >

@@ -213,7 +213,8 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                navigate("./signup");
+                <Link to="./signup">Sign up</Link>;
+                // navigate("./signup");
               }}
               style={{ marginRight: "20px" }}
             >
@@ -222,7 +223,8 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                navigate("./login");
+                // navigate("./login");
+                <Link to="./login">Log in</Link>
               }}
             >
               Log in
