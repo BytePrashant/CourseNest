@@ -1,1 +1,3 @@
-# Nudemy-UdemyClone - A Course selling website
+<div align="center">
+  <h2>Nudemy</h2>
+</div>
