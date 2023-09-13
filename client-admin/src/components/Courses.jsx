@@ -21,7 +21,7 @@ function Courses() {
 
   useEffect(() => {
     axios
-      .get("https://nudemy-backend.vercel.app/admin/courses/", {
+      .get("http://localhost:3000/admin/courses/", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -82,8 +82,8 @@ export function GetCourse(props) {
     if (userInput === "DELETE") {
       axios
         .delete(
-          `https://nudemy-backend.vercel.app/admin/courses/${props.courseId}`,
-          // `https://jeysiva-learn-academy-server.vercel.app/admin/courses/${id}`,
+          
+            `http://localhost:3000/admin/courses/${props.courseId}`, 
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),

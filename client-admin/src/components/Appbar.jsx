@@ -71,7 +71,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("https://nudemy-backend.vercel.app/admin/me", {
+    fetch("http://localhost:3000/admin/me", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

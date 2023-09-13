@@ -43,7 +43,7 @@ function Signup() {
             variant="contained"
             onClick={async () => {
               const res = await axios.post(
-                "https://nudemy-backend.vercel.app/admin/signup",
+                "http://localhost:3000/admin/signup",
                 {
                   username: email,
                   password: password,
