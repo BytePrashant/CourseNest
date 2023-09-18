@@ -1,20 +1,24 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const adminRouter = require('./routes/admin');
-const userRouter = require('./routes/user');
+const dotenv = require("dotenv");
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const adminRouter = require("./routes/admin");
+const userRouter = require("./routes/user");
 
+dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/admin', adminRouter);
-app.use('/user', userRouter);
+app.use("/admin", adminRouter);
+app.use("/user", userRouter);
 
 // Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://prashanttomar:Pra%40092000@cluster0.ohule3e.mongodb.net/",
-  { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" }
-);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: "courses",
+});
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server is running on port ${port}`));
