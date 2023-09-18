@@ -11,7 +11,7 @@ import { RecoilRoot } from "recoil";
 function App() {
   return (
     <div
-      style={{ width: "100vw", height: "100vh", backgroundColor: "#eeeeee" }}
+      // style={{ width: "100vw", height: "100vh", backgroundColor: "#eeeeee" }}
     >
       <RecoilRoot>
         <Router>

@@ -20,7 +20,7 @@ function Course() {
   const [course, setCourse] = useState([]);
 
   useEffect(() => {
-    fetch("https://nudemy.vercel.app/admin/courses/${courseId}", {
+    fetch("http://localhost:3000/admin/courses/${courseId}", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -30,7 +30,7 @@ function Course() {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
-        return res.json();
+        return res.json(); 
       })
       .then((data) => {
         setCourse(data.course);
@@ -132,22 +132,19 @@ function UpdateCourse(props) {
             size="large"
             variant="contained"
             onClick={() => {
-              fetch(
-                "https://nudemy.vercel.app/admin/courses/${props.course.id}",
-                {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                  },
-                  body: JSON.stringify({
-                    title: title,
-                    description: description,
-                    imageLink: image,
-                    published: true,
-                  }),
-                }
-              )
+              fetch("http://localhost:3000/admin/courses/${props.course.id}", {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({
+                  title: title,
+                  description: description,
+                  imageLink: image,
+                  published: true,
+                }),
+              })
                 .then((res) => res.json())
                 .then((data) => {
                   const updatedCourse = {

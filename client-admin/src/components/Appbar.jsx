@@ -53,8 +53,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const handleLogout = () => {
-  localStorage.setItem("token", null);
-  window.location = "/";
+  localStorage.removeItem("token");
+  navigate("/");
 };
 
 function Appbar() {
@@ -71,7 +71,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("https://nudemy.vercel.app/admin/me", {
+    fetch("http://localhost:3000/admin/me", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -213,8 +213,8 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                <Link to="./signup">Sign up</Link>;
-                // navigate("./signup");
+                // <Link to="./signup">Sign up</Link>;
+                navigate("./signup");
               }}
               style={{ marginRight: "20px" }}
             >
@@ -223,8 +223,8 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                // navigate("./login");
-                <Link to="./login">Log in</Link>
+                navigate("./login");
+                // <Link to="./login">Log in</Link>
               }}
             >
               Log in
