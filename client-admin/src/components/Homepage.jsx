@@ -5,6 +5,7 @@ function HomePage() {
       <div
         style={{
           position: "relative",
+          marginLeft: "100px",
           marginBottom: "20px",
           maxWidth: "100%",
           overflow: "hidden",
@@ -23,7 +24,7 @@ function HomePage() {
             transform: "translateY(-50%)",
             textAlign: "left", // Align text to the left
             color: "FAED26", // Yellow text color
-            backgroundColor: "skyblue", // Semi-transparent background
+            backgroundColor: "#00A693", // Semi-transparent background
             padding: "10px",
           }}
         >

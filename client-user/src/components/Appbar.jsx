@@ -52,15 +52,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/");
+};
+
 function Appbar() {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState(null);
   const [open, setOpen] = React.useState(false);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -71,7 +71,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/admin/me", {
+    fetch("http://localhost:3000/users/me", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -189,15 +189,6 @@ function Appbar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            {/* <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton> */}
             <Link to="/" style={{ textDecoration: "none" }}>
               <SchoolIcon fontSize="large" style={{ color: "#ffffff" }} />
             </Link>
@@ -213,18 +204,16 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                // <Link to="./signup">Sign up</Link>;
                 navigate("./signup");
               }}
               style={{ marginRight: "20px" }}
             >
-              Register
+              Sign up
             </Button>
             <Button
               variant="contained"
               onClick={() => {
                 navigate("./login");
-                // <Link to="./login">Log in</Link>
               }}
             >
               Log in

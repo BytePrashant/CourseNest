@@ -30,6 +30,14 @@ function Courses() {
         setCourses(res.data.courses);
       });
   }, []);
+
+  // Callback function to delete a course and update the courses state
+  const handleDeleteCourse = (deletedCourseId) => {
+    // Filter out the deleted course from the courses array
+    setCourses((prevCourses) =>
+      prevCourses.filter((course) => course._id !== deletedCourseId)
+    );
+  };
   return (
     <div>
       {/* Header */}
@@ -58,18 +66,11 @@ function Courses() {
         <Grid container spacing={4}>
           {courses.map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item.id}>
-              <GetCourse course={item} />
+              <GetCourse course={item} onDeleteCourse={handleDeleteCourse} />
             </Grid>
           ))}
         </Grid>
       </Container>
-
-      {/* Add a button or additional content if needed */}
-      {/* <Container maxWidth="md">
-        <Button variant="contained" color="primary" fullWidth>
-          Load More
-        </Button>
-      </Container> */}
     </div>
   );
 }
@@ -81,19 +82,13 @@ export function GetCourse(props) {
     const id = props.course._id;
     if (userInput === "DELETE") {
       axios
-        .delete(
-          
-            `http://localhost:3000/admin/courses/${props.courseId}`, 
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
-        )
+        .delete(`http://localhost:3000/admin/courses/${props.course._id}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
         .then((res) => {
-          setCourses(courses.filter((course) => course._id !== id));
-          toast.success(res.data.message);
-          navigate("/courses");
+          props.onDeleteCourse(id);
         })
         .catch((err) => console.log(err));
     }
@@ -131,7 +126,7 @@ export function GetCourse(props) {
                 >
                   Edit
                 </Button>
-                
+
                 <Button size="small" onClick={() => deleteCourse()}>
                   Delete
                 </Button>

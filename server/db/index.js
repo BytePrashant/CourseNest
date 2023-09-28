@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 // Define mongoose schemas
 const userSchema = new mongoose.Schema({
-  username: { type: String },
+  username: String,
   password: String,
   purchasedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 });
@@ -14,9 +14,8 @@ const adminSchema = new mongoose.Schema({
 const courseSchema = new mongoose.Schema({
   title: String,
   description: String,
-  price: Number,
   imageLink: String,
-  published: Boolean,
+  price: Number,
 });
 
 const User = mongoose.model("User", userSchema);

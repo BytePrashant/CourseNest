@@ -1,7 +1,21 @@
 const express = require("express");
-const { authenticateJwt, SECRET } = require("../middleware/auth");
+const cors = require("cors");
 const { User, Course, Admin } = require("../db");
+const jwt = require("jsonwebtoken");
+const { authenticateJwt, SECRET } = require("../middleware/auth");
 const router = express.Router();
+router.use(cors());
+
+router.get("/me", authenticateJwt, async (req, res) => {
+  const user = await User.findOne({ username: req.user.username });
+  if (!user) {
+    res.status(403).json({ msg: "User doesnt exist" });
+    return;
+  }
+  res.json({
+    username: user.username,
+  });
+});
 
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
@@ -12,18 +26,18 @@ router.post("/signup", async (req, res) => {
     const newUser = new User({ username, password });
     await newUser.save();
     const token = jwt.sign({ username, role: "user" }, SECRET, {
-      expiresIn: "30d",
+      expiresIn: "1d",
     });
     res.json({ message: "User created successfully", token });
-  }
+  } 
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.headers;
+  const { username, password } = req.body;
   const user = await User.findOne({ username, password });
   if (user) {
     const token = jwt.sign({ username, role: "user" }, SECRET, {
-      expiresIn: "30d",
+      expiresIn: "1d",
     });
     res.json({ message: "Logged in successfully", token });
   } else {
