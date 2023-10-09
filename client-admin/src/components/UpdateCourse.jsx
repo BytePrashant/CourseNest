@@ -15,6 +15,7 @@ function UpdateCourse(props) {
   const [description, setDescription] = useState(props.course.description);
   const [image, setImage] = useState(props.course.imageLink);
   const [price, setPrice] = useState(props.course.price);
+  console.log(title);
   return (
     <div>
       <div
@@ -66,6 +67,7 @@ function UpdateCourse(props) {
             fullWidth={true}
             label="Price"
             variant="outlined"
+            value={price}
           />
           <br /> <br />
           <Button

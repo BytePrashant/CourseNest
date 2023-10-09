@@ -17,10 +17,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />;
             <Route path="/addcourse" element={<AddCourse />} />
-            <Route path="/course/:courseId" element={<Course />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/courses/" element={<Courses />} />
+            <Route path="/courses/:courseId" element={<Course />} />
           </Routes>
         </Router>
       </RecoilRoot>

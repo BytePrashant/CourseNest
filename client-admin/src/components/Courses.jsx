@@ -122,7 +122,7 @@ export function GetCourse(props) {
               <CardActions>
                 <Button
                   size="small"
-                  onClick={() => navigate("/course/" + props.course._id)}
+                  onClick={() => navigate("/courses/" + props.course._id)}
                 >
                   Edit
                 </Button>

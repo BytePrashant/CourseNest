@@ -1,38 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UpdateCourse from "./UpdateCourse";
-import {
-  atom,
-} from "recoil";
+import { atom } from "recoil";
 
 function Course() {
   let { courseId } = useParams();
-  const [course, setCourse] = useState([]);
+  const [course, setCourse] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:3000/admin/courses/${courseId}`, {
+    fetch(`http://localhost:3000/admin/course/${courseId}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => {
+        console.log(res);
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was not ok>>>>>>>>>>>>>>>>>");
         }
         return res.json();
       })
-      .then((data) => {
-        setCourse(data.course);
+      .then((data ) => {
+        if (data && data.course) {
+          setCourse(data.course);
+        } else {
+          console.error("Course data not found in the response");
+        }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data>>>:", error);
       });
   }, [courseId]);
-
+  console.log(course);
   return (
     <div>
-      <UpdateCourse course={course} setCourse={setCourse} />
+      <UpdateCourse course={course} />
     </div>
   );
 }
