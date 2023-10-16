@@ -1,21 +1,8 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import {
-  Typography,
-  Button,
-  Card,
-  TextField,
-} from "@mui/material";
-
 function UpdateCourse(props) {
-  console.log(props.course); // Add this line to check the values in the console
-  const navigate = useNavigate();
-  let { courseId } = useParams();
-  const [title, setTitle] = useState(props.course.title);
-  const [description, setDescription] = useState(props.course.description);
-  const [image, setImage] = useState(props.course.imageLink);
-  const [price, setPrice] = useState(props.course.price);
-  console.log(title);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+
   return (
     <div>
       <div
@@ -37,7 +24,6 @@ function UpdateCourse(props) {
             fullWidth={true}
             label="Course Title"
             variant="outlined"
-            value={title}
           />
           <br /> <br />
           <TextField
@@ -47,7 +33,6 @@ function UpdateCourse(props) {
             fullWidth={true}
             label="Course Description"
             variant="outlined"
-            value={description}
           />
           <br /> <br />
           <TextField
@@ -57,17 +42,6 @@ function UpdateCourse(props) {
             fullWidth={true}
             label="Image Link"
             variant="outlined"
-            value={image}
-          />
-          <br /> <br />
-          <TextField
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
-            fullWidth={true}
-            label="Price"
-            variant="outlined"
-            value={price}
           />
           <br /> <br />
           <Button
@@ -97,8 +71,6 @@ function UpdateCourse(props) {
                     published: true,
                   };
                   props.setCourse(updatedCourse);
-                  alert("Course Updated");
-                  navigate("/Courses");
                 });
             }}
           >
@@ -109,5 +81,3 @@ function UpdateCourse(props) {
     </div>
   );
 }
-
-export default UpdateCourse;

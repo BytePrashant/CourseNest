@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
-// import CourseCard from "./CourseCard";
 import "../index.css";
-import { useRecoilState } from "recoil";
-import axios from "axios";
-// import { Main, openState } from "./Appbar";
 import "./coursesStyles.css";
+import CourseCard from "./CourseCard";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 
 function PurchasedCourses() {
-//   const [open] = useRecoilState(openState);
-  const [purCourses, setPurchasedCourses] = useState([]);
+  const [purchasedCourses, setPurchasedCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -21,6 +17,7 @@ function PurchasedCourses() {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
+      .then((res) => res.json())
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
         setIsLoading(false);
@@ -32,7 +29,7 @@ function PurchasedCourses() {
   }, []);
 
   return (
-    <Main open={open}>
+    <div>
       <Typography
         variant="h4"
         component="div"
@@ -58,15 +55,15 @@ function PurchasedCourses() {
           </div>
         ) : (
           <>
-            {purCourses.length > 0
-              ? purCourses.map((course) => (
+            {purchasedCourses.length > 0
+              ? purchasedCourses.map((course) => (
                   <CourseCard key={course._id} course={course} />
                 ))
               : "No course has yet been bought!"}
           </>
         )}
       </div>
-    </Main>
+    </div>
   );
 }
 

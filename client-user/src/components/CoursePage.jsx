@@ -60,9 +60,9 @@ function CoursePage() {
     })
       .then((res) => res.json())
       .then((res) => {
-        
-        setPurchasedCourses(res.data.purchasedCourses);
+        setPurchasedCourses(res.purchasedCourses);
         setIsLoading(false);
+        setIsPurchased(true);
       })
       .catch((err) => {
         console.log(err);
@@ -100,11 +100,15 @@ function CoursePage() {
         </div>
 
         <div>
-          <h1 className="course-title">{course.title}</h1>
+          <Typography variant="h3" gutterBottom className="course-title">
+            {course.title}
+          </Typography>
         </div>
 
         <div>
-          <h3 className="des">{course.description}</h3>
+          <Typography variant="h6" gutterBottom className="des">
+            {course.description}
+          </Typography>
         </div>
 
         <div>
@@ -128,10 +132,9 @@ function CoursePage() {
                 })
                   .then((res) => res.json())
                   .then((res) => {
-                    console.log(res);
                     toast.success(res.data.message);
                     setPurchasedCourses([
-                      ...purchasedCourses,
+                      // ...purchasedCourses,
                       res.data.purchasedCourse,
                     ]);
                     setIsPurchased(true);
@@ -143,7 +146,7 @@ function CoursePage() {
                   });
               }}
             >
-              BUY NOW @ ${course.price}
+              BUY NOW ₹{course.price}
             </Button>
           ) : (
             <div>
@@ -176,7 +179,6 @@ function CoursePage() {
           )}
         </div>
       </div>
-
       <div>
         <Card
           sx={{ width: "350px" }}

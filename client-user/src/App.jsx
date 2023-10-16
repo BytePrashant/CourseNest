@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Courses from "./components/Courses";
 import CoursePage from "./components/CoursePage";
 import PurchasedCourses from "./components/PurchasedCourses";
+import Homepage from "./components/Homepage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/course/:courseId" element={<CoursePage />} />
             <Route path="/purchasedCourses" element={<PurchasedCourses />} />
+            <Route path="/home" element={<Homepage />} />
           </Routes>
         </Router>
       </RecoilRoot>

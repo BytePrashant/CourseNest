@@ -1,70 +1,18 @@
+import Card from "@mui/material/Card";
+import PropTypes from "prop-types";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { Card, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useState } from "react";
 
-function Courses() {
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/user/courses/", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        setCourses(res.data.courses);
-      });
-  }, []);
-  return (
-    <div>
-      {/* Header */}
-      <Box
-        sx={{
-          backgroundColor: "background.paper",
-          paddingTop: 8,
-          paddingBottom: 6,
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            Courses
-          </Typography>
-        </Container>
-      </Box>
-
-      {/* Course List */}
-      <Container sx={{ paddingTop: 8, paddingBottom: 8 }} maxWidth="md">
-        <Grid container spacing={4}>
-          {courses.map((item) => (
-            <Grid item xs={12} sm={6} md={4} key={item.id}>
-              <GetCourse course={item} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </div>
-  );
-}
-
-export function GetCourse(props) {
+function CourseCard(props) {
   const navigate = useNavigate();
   const [isMoveOver, setIsMoueOver] = useState(false);
   return (
     <div>
       <Card
-        sx={{ maxWidth: 345, height: 300 }}
+        sx={{ maxWidth: 345, height: 400 }}
         style={{
           display: "flex",
           flex: 1,
@@ -75,17 +23,14 @@ export function GetCourse(props) {
         onMouseOver={() => setIsMoueOver(true)}
         onMouseLeave={() => setIsMoueOver(false)}
         onClick={() => {
-          navigate(`/course/${props.course._id}`);
+          navigate(`/courses/${props.course._id}`);
         }}
       >
         <div>
           <CardMedia
-            component="div"
-            sx={{
-              // 16:9
-              pt: "56.25%",
-            }}
+            sx={{ height: 200, width: 250 }}
             image={props.course.imageLink}
+            title={props.course.title}
           />
           <CardContent
             style={{
@@ -133,7 +78,7 @@ export function GetCourse(props) {
               component="div"
               style={{ fontWeight: "900" }}
             >
-              ₹{props.course.price}
+              ${props.course.price}
             </Typography>
           </CardContent>
         </div>
@@ -142,4 +87,13 @@ export function GetCourse(props) {
   );
 }
 
-export default Courses;
+CourseCard.propTypes = {
+  course: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    imageLink: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default CourseCard;

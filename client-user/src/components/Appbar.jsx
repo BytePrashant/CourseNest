@@ -21,6 +21,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 
 const drawerWidth = 240;
 
@@ -69,7 +71,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/user/me", {
+    fetch("http://localhost:3000/users/me", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -142,17 +144,14 @@ function Appbar() {
             </DrawerHeader>
             <Divider />
             <List>
-              {[
-                "All Courses",
-                "Purchased Course",
-              ].map((text, index) => (
+              {["Add Course", "All Courses"].map((text, index) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (text === "Purchased Course") {
-                        window.location = "/PurchasedCourses";
+                      if (text === "Add Course") {
+                        window.location = "/AddCourse";
                       } else if (text === "All Courses") {
-                        window.location = "/courses";
+                        window.location = "/Courses";
                       }
                     }}
                   >
@@ -162,6 +161,19 @@ function Appbar() {
                       ) : (
                         <LibraryAddCheckIcon />
                       )}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+            <Divider />
+            <List>
+              {["All mail", "Trash", "Spam"].map((text, index) => (
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItemButton>
