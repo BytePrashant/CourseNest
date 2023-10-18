@@ -21,8 +21,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
 const drawerWidth = 240;
 
@@ -58,8 +56,8 @@ function Appbar() {
   const [open, setOpen] = React.useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
     navigate("/");
+    localStorage.removeItem("token");
   };
 
   const handleDrawerOpen = () => {
@@ -167,19 +165,6 @@ function Appbar() {
                 </ListItem>
               ))}
             </List>
-            <Divider />
-            <List>
-              {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
           </Drawer>
         </Box>
       </div>
@@ -213,7 +198,6 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                // <Link to="./signup">Sign up</Link>;
                 navigate("./signup");
               }}
               style={{ marginRight: "20px" }}
@@ -224,7 +208,6 @@ function Appbar() {
               variant="contained"
               onClick={() => {
                 navigate("./login");
-                // <Link to="./login">Log in</Link>
               }}
             >
               Log in

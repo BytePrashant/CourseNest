@@ -1,8 +1,22 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Typography, Button, Card, TextField } from "@mui/material";
+
 function UpdateCourse(props) {
+  let { courseId } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
+  const navigate = useNavigate();
 
+  useEffect(() => {
+      setTitle(props.course.title);
+      setDescription(props.course.description);
+      setImage(props.course.imageLink);
+      setPrice(props.course.price);
+  }, [props.course]);
+  
   return (
     <div>
       <div
@@ -22,8 +36,8 @@ function UpdateCourse(props) {
               setTitle(e.target.value);
             }}
             fullWidth={true}
-            label="Course Title"
             variant="outlined"
+            value={title}
           />
           <br /> <br />
           <TextField
@@ -31,8 +45,8 @@ function UpdateCourse(props) {
               setDescription(e.target.value);
             }}
             fullWidth={true}
-            label="Course Description"
             variant="outlined"
+            value={description}
           />
           <br /> <br />
           <TextField
@@ -40,8 +54,17 @@ function UpdateCourse(props) {
               setImage(e.target.value);
             }}
             fullWidth={true}
-            label="Image Link"
             variant="outlined"
+            value={image}
+          />
+          <br /> <br />
+          <TextField
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+            fullWidth={true}
+            variant="outlined"
+            value={price}
           />
           <br /> <br />
           <Button
@@ -58,6 +81,7 @@ function UpdateCourse(props) {
                   title: title,
                   description: description,
                   imageLink: image,
+                  price: price,
                   published: true,
                 }),
               })
@@ -68,10 +92,13 @@ function UpdateCourse(props) {
                     title: title,
                     description: description,
                     imageLink: image,
+                    price: price,
                     published: true,
                   };
                   props.setCourse(updatedCourse);
                 });
+              alert("Course Updated!");
+              navigate("/Courses");
             }}
           >
             Update Course
@@ -81,3 +108,5 @@ function UpdateCourse(props) {
     </div>
   );
 }
+
+export default UpdateCourse;

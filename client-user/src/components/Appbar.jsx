@@ -52,15 +52,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  navigate("/");
-};
-
 function Appbar() {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState(null);
   const [open, setOpen] = React.useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -71,7 +71,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/users/me", {
+    fetch("http://localhost:3000/user/me", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -144,14 +144,14 @@ function Appbar() {
             </DrawerHeader>
             <Divider />
             <List>
-              {["Add Course", "All Courses"].map((text, index) => (
+              {["All Courses", "Purchased Courses"].map((text, index) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (text === "Add Course") {
-                        window.location = "/AddCourse";
-                      } else if (text === "All Courses") {
+                      if (text === "All Courses") {
                         window.location = "/Courses";
+                      } else if (text === "Purchased Courses") {
+                        window.location = "/PurchasedCourses";
                       }
                     }}
                   >
@@ -161,19 +161,6 @@ function Appbar() {
                       ) : (
                         <LibraryAddCheckIcon />
                       )}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-            <List>
-              {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItemButton>

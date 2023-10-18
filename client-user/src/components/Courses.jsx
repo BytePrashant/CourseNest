@@ -20,7 +20,7 @@ function Courses() {
       .then((res) => {
         setCourses(res.data.courses);
       });
-  }, []);
+    }, []);
   return (
     <div>
       {/* Header */}
@@ -103,9 +103,6 @@ export function GetCourse(props) {
                 color: isMoveOver && "#bc1c44",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                display: "-webkit-box",
-                "-webkit-line-clamp": 2, // Set the maximum number of lines to 2
-                "-webkit-box-orient": "vertical",
               }}
             >
               {props.course.title}

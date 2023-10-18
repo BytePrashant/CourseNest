@@ -14,6 +14,7 @@ function AddCourse() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(0);
+  const [published, setPublished] = useState(false);
 
   return (
     <div>

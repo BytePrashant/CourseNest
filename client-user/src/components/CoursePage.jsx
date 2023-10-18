@@ -26,7 +26,7 @@ import Skeleton from "@mui/material/Skeleton";
 function CoursePage() {
   let { courseId } = useParams();
   const [course, setCourse] = useState({});
-  const [purchasedCourses, setPurchasedCourses] = useState([]);
+  const [purchasedCourses, setPurchasedCourses] = useState({});
   const [isPurchased, setIsPurchased] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,7 +62,7 @@ function CoursePage() {
       .then((res) => {
         setPurchasedCourses(res.purchasedCourses);
         setIsLoading(false);
-        setIsPurchased(true);
+        setIsPurchased(false);
       })
       .catch((err) => {
         console.log(err);
@@ -132,10 +132,11 @@ function CoursePage() {
                 })
                   .then((res) => res.json())
                   .then((res) => {
-                    toast.success(res.data.message);
+                    console.log(res)
+                    // toast.success(res.data.message);
                     setPurchasedCourses([
-                      // ...purchasedCourses,
-                      res.data.purchasedCourse,
+                      ...purchasedCourses,
+                      // res.data.purchasedCourses,
                     ]);
                     setIsPurchased(true);
                     setIsLoading(false);
@@ -146,7 +147,7 @@ function CoursePage() {
                   });
               }}
             >
-              BUY NOW ₹{course.price}
+              BUY @ ₹{course.price}
             </Button>
           ) : (
             <div>

@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/courses", authenticateJwt, async (req, res) => {
-  const courses = await Course.find({ published: true });
+  const courses = await Course.find({});
   res.json({ courses });
 });
 
