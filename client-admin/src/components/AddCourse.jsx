@@ -71,7 +71,7 @@ function AddCourse() {
             variant="contained"
             onClick={async () => {
               await axios.post(
-                "http://localhost:3000/admin/courses",
+                "https://nudemy-server.vercel.app/admin/courses",
                 {
                   title: title,
                   description: description,
