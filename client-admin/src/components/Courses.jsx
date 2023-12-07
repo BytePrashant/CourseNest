@@ -15,7 +15,7 @@ function Courses() {
 
   useEffect(() => {
     axios
-      .get("https://nudemy-server.vercel.app/admin/courses/", {
+      .get("http://localhost:3000/admin/courses/", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -89,14 +89,11 @@ export function GetCourse(props) {
     const id = props.course._id;
     if (userInput === "DELETE") {
       axios
-        .delete(
-          `https://nudemy-server.vercel.app/admin/courses/${props.course._id}`,
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
-        )
+        .delete(`http://localhost:3000/admin/courses/${props.course._id}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
         .then((res) => {
           props.onDeleteCourse(id);
         })

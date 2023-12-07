@@ -8,7 +8,7 @@ function Course() {
   const [course, setCourse] = useState({});
 
   useEffect(() => {
-    fetch(`https://nudemy-server.vercel.app/admin/course/${courseId}`, {
+    fetch(`http://localhost:3000/admin/course/${courseId}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -21,7 +21,7 @@ function Course() {
         }
         return res.json();
       })
-      .then((data) => {
+      .then((data ) => {
         if (data && data.course) {
           setCourse(data.course);
         } else {

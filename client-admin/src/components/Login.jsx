@@ -1,4 +1,10 @@
-import { Typography, Button, Card, TextField } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Typography, Button, TextField, Container } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -7,43 +13,57 @@ function Login() {
   const [password, setPassword] = useState("");
 
   return (
-    <div>
-      <div
-        style={{
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
           display: "flex",
-          justifyContent: "center",
-          paddingTop: 150,
-          marginBottom: 10,
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Typography variant={"h6"}>Welcome back. Log in below</Typography>
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Card variant="outlined" style={{ width: 400, padding: 20 }}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" noValidate sx={{ mt: 1 }}>
           <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            fullWidth={true}
-            label="Email"
-            variant="outlined"
           />
-          <br /> <br />
           <TextField
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            fullWidth={true}
+            margin="normal"
+            required
+            fullWidth
+            name="password"
             label="Password"
-            variant="outlined"
+            type="password"
+            id="password"
+            autoComplete="current-password"
           />
-          <br /> <br />
           <Button
             size="large"
             variant="contained"
+            fullWidth
+            sx={{ mt: 3, mb: 2 }}
             onClick={async () => {
               const res = await axios.post(
-                "https://nudemy-server.vercel.app/admin/login",
+                "http://localhost:3000/admin/login",
                 {
                   username: email,
                   password: password,
@@ -54,12 +74,21 @@ function Login() {
             }}
             style={{ color: "#ffffff" }}
           >
-            Log In
+            Sign In
           </Button>
-        </Card>
-      </div>
-    </div>
+          <Grid container>
+            <Grid item>
+              <Link href="/signup" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 }
-
 export default Login;
+
+
+

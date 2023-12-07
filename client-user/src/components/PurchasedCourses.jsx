@@ -20,7 +20,7 @@ function PurchasedCourses() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://nudemy-server.vercel.app/user/purchasedCourses`, {
+    fetch(`http://localhost:3000/user/purchasedCourses`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

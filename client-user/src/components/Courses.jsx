@@ -12,7 +12,7 @@ function Courses() {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
-      .get("https://nudemy-server.vercel.app/user/courses/", {
+      .get("http://localhost:3000/user/courses/", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

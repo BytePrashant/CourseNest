@@ -71,23 +71,20 @@ function UpdateCourse(props) {
             size="large"
             variant="contained"
             onClick={() => {
-              fetch(
-                `https://nudemy-server.vercel.app/admin/courses/${courseId}`,
-                {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                  },
-                  body: JSON.stringify({
-                    title: title,
-                    description: description,
-                    imageLink: image,
-                    price: price,
-                    published: true,
-                  }),
-                }
-              )
+              fetch(`http://localhost:3000/admin/courses/${courseId}`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({
+                  title: title,
+                  description: description,
+                  imageLink: image,
+                  price: price,
+                  published: true,
+                }),
+              })
                 .then((res) => res.json())
                 .then((data) => {
                   const updatedCourse = {

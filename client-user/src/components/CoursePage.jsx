@@ -32,7 +32,7 @@ function CoursePage() {
 
   // Fetch the course information
   useEffect(() => {
-    fetch(`https://nudemy-server.vercel.app/user/course/${courseId}`, {
+    fetch(`http://localhost:3000/user/course/${courseId}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -52,7 +52,7 @@ function CoursePage() {
 
   // Fetch the purchased courses
   useEffect(() => {
-    fetch(`https://nudemy-server.vercel.app/user/purchasedCourses`, {
+    fetch(`http://localhost:3000/user/purchasedCourses`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -124,18 +124,15 @@ function CoursePage() {
               }}
               onClick={() => {
                 setIsLoading(true);
-                fetch(
-                  `https://nudemy-server.vercel.app/user/course/${courseId}`,
-                  {
-                    method: "POST",
-                    headers: {
-                      Authorization: "Bearer " + localStorage.getItem("token"),
-                    },
-                  }
-                )
+                fetch(`http://localhost:3000/user/course/${courseId}`, {
+                  method: "POST",
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                  },
+                })
                   .then((res) => res.json())
                   .then((res) => {
-                    console.log(res);
+                    console.log(res)
                     // toast.success(res.data.message);
                     setPurchasedCourses([
                       ...purchasedCourses,

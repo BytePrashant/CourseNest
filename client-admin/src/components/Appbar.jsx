@@ -69,7 +69,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("https://nudemy-server.vercel.app/admin/me", {
+    fetch("http://localhost:3000/admin/me", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -210,7 +210,7 @@ function Appbar() {
                 navigate("./login");
               }}
             >
-              Log in
+              Sign in
             </Button>
           </Toolbar>
         </AppBar>
