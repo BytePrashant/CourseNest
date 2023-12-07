@@ -7,10 +7,10 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Machine you want to deploy on
 
     steps:
-    - name: Checkout code # will copy code and run
+    - name: Checkout code # will copy code on unbuntu machine
       uses: actions/checkout@v2 
 
     - name: SSH and deploy
@@ -21,4 +21,4 @@ jobs:
         chmod 600 keyfile
         mkdir -p ~/.ssh
         cp known_hosts ~/.ssh/known_hosts
-        ssh -t -i keyfile ubuntu@ec2-13-48-190-242.eu-north-1.compute.amazonaws.com "sudo bash ~/deploy.sh"
+        ssh -t -i keyfile ubuntu@ec2-13-127-199-188.ap-south-1.compute.amazonaws.com "sudo bash ~/deploy.sh"
