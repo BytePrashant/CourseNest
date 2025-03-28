@@ -1,5 +1,5 @@
 <div align="center">
-  <h2>Nudemy - A course selling app</h2>
+  <h2>CourseNest – A hub for all courses</h2>
 </div>
 
 A feature-rich full-stack course-selling website using the MERN stack (Node.js, Express.js, MongoDB, and React).
