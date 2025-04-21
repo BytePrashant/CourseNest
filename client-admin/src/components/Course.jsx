@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UpdateCourse from "./UpdateCourse";
 import { atom } from "recoil";
+import { BASE_URL } from "../config";
 
 function Course() {
   let { courseId } = useParams();

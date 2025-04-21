@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Typography, Button, Card, TextField } from "@mui/material";
+import { BASE_URL } from "../config";
 
 function UpdateCourse(props) {
   let { courseId } = useParams();

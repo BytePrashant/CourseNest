@@ -7,6 +7,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Typography, Button, TextField, Container } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../config";
 
 function Login() {
   const [email, setEmail] = useState("");

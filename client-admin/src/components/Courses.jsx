@@ -9,6 +9,7 @@ import { Card, Typography, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../config";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
