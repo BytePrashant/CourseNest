@@ -15,7 +15,7 @@ function Courses() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/courses/", {
+      .get(`${BASE_URL}/admin/courses/`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -89,7 +89,7 @@ export function GetCourse(props) {
     const id = props.course._id;
     if (userInput === "DELETE") {
       axios
-        .delete(`http://localhost:3000/admin/courses/${props.course._id}`, {
+        .delete(`${BASE_URL}/admin/courses/${props.course._id}`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },

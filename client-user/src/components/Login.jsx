@@ -62,7 +62,7 @@ function Login() {
             fullWidth
             sx={{ mt: 3, mb: 2 }}
             onClick={async () => {
-              const res = await axios.post("http://localhost:3000/user/login", {
+              const res = await axios.post(`${BASE_URL}/user/login`, {
                 username: email,
                 password: password,
               });

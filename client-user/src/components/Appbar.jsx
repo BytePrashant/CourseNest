@@ -71,7 +71,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/user/me", {
+    fetch(`${BASE_URL}/user/me`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

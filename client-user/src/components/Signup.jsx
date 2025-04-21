@@ -63,7 +63,7 @@ function Signup() {
             sx={{ mt: 3, mb: 2 }}
             onClick={async () => {
               const res = await axios.post(
-                "http://localhost:3000/user/signup",
+                `${BASE_URL}/user/signup`,
                 {
                   username: email,
                   password: password,

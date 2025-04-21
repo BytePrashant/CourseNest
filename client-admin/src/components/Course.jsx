@@ -8,7 +8,7 @@ function Course() {
   const [course, setCourse] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:3000/admin/course/${courseId}`, {
+    fetch(`${BASE_URL}/admin/course/${courseId}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

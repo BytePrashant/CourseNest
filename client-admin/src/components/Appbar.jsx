@@ -21,6 +21,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { BASE_URL } from "../config";
 
 const drawerWidth = 240;
 
@@ -69,7 +70,7 @@ function Appbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/admin/me", {
+    fetch(`${BASE_URL}/admin/me`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

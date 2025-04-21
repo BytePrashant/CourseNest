@@ -32,7 +32,7 @@ function CoursePage() {
 
   // Fetch the course information
   useEffect(() => {
-    fetch(`http://localhost:3000/user/course/${courseId}`, {
+    fetch(`${BASE_URL}/user/course/${courseId}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -52,7 +52,7 @@ function CoursePage() {
 
   // Fetch the purchased courses
   useEffect(() => {
-    fetch(`http://localhost:3000/user/purchasedCourses`, {
+    fetch(`${BASE_URL}/user/purchasedCourses`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

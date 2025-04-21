@@ -12,7 +12,7 @@ function Courses() {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/user/courses/", {
+      .get(`${BASE_URL}/user/courses/`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
